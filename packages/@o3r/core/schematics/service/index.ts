@@ -46,10 +46,10 @@ function ngGenerateServiceFn(options: NgGenerateServiceSchematicsSchema): Rule {
     let packageName = destination;
     if (workspaceProject?.projectType !== 'application') {
       let rec = '..';
-      while (!tree.exists(path.resolve(destination, rec, 'package.json')) && path.resolve(destination, rec) !== '/') {
+      while (!tree.exists(path.join(destination, rec, 'package.json')) && path.resolve(destination, rec) !== '/') {
         rec = path.join('..', rec);
       }
-      packageName = JSON.parse(tree.read(path.resolve(destination, rec, 'package.json'))!.toString()).name?.split('/')[0] || destination;
+      packageName = JSON.parse(tree.read(path.join(destination, rec, 'package.json'))!.toString()).name?.split('/')[0] || destination;
     }
 
     const templateData = {
